@@ -97,7 +97,7 @@ For detailed instructions, troubleshooting, and how the authentication system wo
 
 ## MCP Configuration
 
-> **⚠️ Context Window Warning:** This MCP provides **31 tools** which consume a significant portion of your context window. It's recommended to **disable the MCP when not actively using NotebookLM** to preserve context for your other work. In Claude Code, use `@notebooklm` to toggle it on/off, or use `/mcp` command.
+> **⚠️ Context Window Warning:** This MCP provides **31 tools** which consume a significant portion of your context window. It's recommended to **disable the MCP when not actively using NotebookLM** to preserve context for your other work. In Claude Code, use `@notebooklm-mcp` to toggle it on/off, or use `/mcp` command.
 
 No environment variables needed - the MCP uses cached tokens from `~/.notebooklm-mcp/auth.json`.
 
@@ -107,12 +107,12 @@ Use the built-in CLI command to add the MCP server:
 
 **Add for all projects (recommended):**
 ```bash
-claude mcp add --scope user notebooklm notebooklm-mcp
+claude mcp add --scope user notebooklm-mcp notebooklm-mcp
 ```
 
 **Or add for current project only:**
 ```bash
-claude mcp add notebooklm notebooklm-mcp
+claude mcp add notebooklm-mcp notebooklm-mcp
 ```
 
 That's it! Restart Claude Code to use the MCP tools.
@@ -130,7 +130,7 @@ If you prefer to edit the config file manually, add to `~/.claude.json`:
 ```json
 {
   "mcpServers": {
-    "notebooklm": {
+    "notebooklm-mcp": {
       "command": "notebooklm-mcp"
     }
   }
@@ -140,7 +140,9 @@ If you prefer to edit the config file manually, add to `~/.claude.json`:
 Restart Claude Code after editing.
 </details>
 
-### Cursor
+### Cursor, VS Code & Other IDEs (JSON Method)
+
+For IDEs that use JSON configuration files for MCP servers:
 
 **Step 1:** Find where the MCP binary is installed:
 
@@ -154,12 +156,17 @@ where notebooklm-mcp
 # Example output: /Users/yourname/.local/bin/notebooklm-mcp
 ```
 
-**Step 2:** Add to `~/.cursor/mcp.json` using the full path from Step 1:
+**Step 2:** Add to your IDE's MCP config file using the full path from Step 1:
+
+| IDE | Config File Location |
+|-----|---------------------|
+| Cursor | `~/.cursor/mcp.json` |
+| VS Code | `~/.vscode/mcp.json` |
 
 ```json
 {
   "mcpServers": {
-    "notebooklm": {
+    "notebooklm-mcp": {
       "command": "/Users/yourname/.local/bin/notebooklm-mcp",
       "args": []
     }
@@ -167,9 +174,31 @@ where notebooklm-mcp
 }
 ```
 
-**Step 3:** Restart Cursor.
+**Step 3:** Restart your IDE.
 
-### Gemini CLI
+### Gemini CLI (Recommended CLI Method)
+
+Use the built-in CLI command to add the MCP server:
+
+**Add for all projects (recommended):**
+```bash
+gemini mcp add --scope user notebooklm-mcp notebooklm-mcp
+```
+
+**Or add for current project only:**
+```bash
+gemini mcp add notebooklm-mcp notebooklm-mcp
+```
+
+That's it! Restart Gemini CLI to use the MCP tools.
+
+**Verify installation:**
+```bash
+gemini mcp list
+```
+
+<details>
+<summary>Alternative: Manual JSON Configuration</summary>
 
 **Step 1:** Find where the MCP binary is installed:
 
@@ -186,13 +215,14 @@ where notebooklm-mcp
 **Step 2:** Add to `~/.gemini/settings.json` under `mcpServers` using the full path from Step 1:
 
 ```json
-"notebooklm": {
+"notebooklm-mcp": {
   "command": "/Users/yourname/.local/bin/notebooklm-mcp",
   "args": []
 }
 ```
 
 **Step 3:** Restart Gemini CLI.
+</details>
 
 ### Managing Context Window Usage
 
@@ -201,7 +231,7 @@ Since this MCP has 31 tools, it's good practice to disable it when not in use:
 **Claude Code:**
 ```bash
 # Toggle on/off by @-mentioning in chat
-@notebooklm
+@notebooklm-mcp
 
 # Or use the /mcp command to enable/disable
 /mcp
