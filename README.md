@@ -21,6 +21,7 @@ An MCP server for **NotebookLM** (notebooklm.google.com).
 | `notebook_get` | Get notebook details with sources |
 | `notebook_describe` | Get AI-generated summary of notebook content |
 | `source_describe` | Get AI-generated summary and keywords for a source |
+| `source_get_content` | Get raw text content from a source (no AI processing) |
 | `notebook_rename` | Rename a notebook |
 | `chat_configure` | Configure chat goal/style and response length |
 | `notebook_delete` | Delete a notebook (requires confirmation) |

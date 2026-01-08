@@ -71,6 +71,27 @@ print(source_info["summary"])  # AI summary with **bold** keywords
 print(source_info["keywords"])  # Topic chips: ["Medical education", "AI tools", ...]
 ```
 
+### Get Raw Source Content
+
+```python
+# Get raw text content from a source (no AI processing)
+# Much faster than notebook_query for bulk content export
+content = source_get_content(source_id)
+print(content["title"])        # Source title
+print(content["source_type"])  # pdf, web_page, youtube, pasted_text, google_docs, etc.
+print(content["char_count"])   # Character count
+print(content["content"])      # Full raw text
+
+# Example: Export all sources to markdown files
+sources = notebook_get(notebook_id)["sources"]
+for source in sources:
+    content = source_get_content(source["id"])
+    with open(f"{content['title']}.md", 'w') as f:
+        f.write(content["content"])
+```
+
+**Supported source types:** google_docs, google_slides_sheets, pdf, pasted_text, web_page, youtube
+
 ### Sync Stale Drive Sources
 ```python
 # Check which sources need syncing

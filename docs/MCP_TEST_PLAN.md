@@ -179,7 +179,19 @@ Get an AI-generated summary of source [source_id from Test 2.4].
 
 ---
 
-### Test 2.6 - Delete Source
+### Test 2.6 - Get Source Content
+**Tool:** `source_get_content`
+
+**Prompt:**
+```
+Get the raw text content of source [source_id from Test 2.4].
+```
+
+**Expected:** Raw text content with title, source_type, char_count, and content fields. No AI processing.
+
+---
+
+### Test 2.7 - Delete Source
 **Tool:** `source_delete`
 
 **Prompt:**
@@ -600,7 +612,7 @@ After completing all tests, verify:
 
 **Notebook Operations (5):** notebook_list, notebook_create, notebook_get, notebook_describe, notebook_rename
 
-**Source Management (6):** notebook_add_url, notebook_add_text, notebook_add_drive, source_describe, source_list_drive, source_sync_drive
+**Source Management (7):** notebook_add_url, notebook_add_text, notebook_add_drive, source_describe, source_get_content, source_list_drive, source_sync_drive
 
 **AI Features (2):** notebook_query, chat_configure
 
@@ -616,7 +628,7 @@ After completing all tests, verify:
 
 **Cleanup (1):** notebook_delete
 
-**Total: 30 tools**
+**Total: 31 tools**
 
 ---
 
@@ -632,27 +644,28 @@ Use these prompts sequentially with another AI tool that has access to the MCP:
 6. `Add text to notebook [id]: "Machine learning test document about AI algorithms"`
 7. `List sources in notebook [id] with Drive status`
 8. `Get AI summary of source [source_id]`
-9. `Get AI summary of notebook [id]`
-10. `Ask notebook [id]: "What is artificial intelligence?"`
-11. `Configure notebook [id] chat: goal=learning_guide, response_length=longer`
-12. `Start fast web research for "OpenShift" in notebook [id]`
-13. `Check research status for notebook [id]`
-14. `Import all research sources from task [task_id] into notebook [id]`
-15. `Start DEEP web research for "AI ROI" in notebook [id]` ← **Kicks off 3-5 min background task**
-16. `Create brief audio overview for notebook [id] (show settings first)`
-17. `Confirmed - create it with confirm=True`
-18. `Create brief video overview for notebook [id] (show settings first)`
-19. `Confirmed - create it`
-20. `Check studio status for notebook [id]`
-21. `Create landscape infographic for notebook [id] (show settings first)`
-22. `Create short slide deck for notebook [id] (show settings first)`
-23. `Create Briefing Doc report for notebook [id] (show settings first)`
-24. `Create medium difficulty flashcards for notebook [id] (show settings first)`
-25. `Create mind map titled "AI Concepts" for notebook [id] (show settings first)`
-26. `List all mind maps in notebook [id]`
-27. `Check deep research status for notebook [id]` ← **By now, deep research should be complete**
-28. `Verify source_count > 0 and report field has content`
-29. `Import all deep research sources into notebook [id]`
-30. `Delete audio artifact [artifact_id] from notebook [id] (show warning first)`
-31. `Confirmed - delete it with confirm=True`
-32. `Delete notebook [id] (show warning first)` → `Confirmed - delete with confirm=True`
+9. `Get raw text content of source [source_id]`
+10. `Get AI summary of notebook [id]`
+11. `Ask notebook [id]: "What is artificial intelligence?"`
+12. `Configure notebook [id] chat: goal=learning_guide, response_length=longer`
+13. `Start fast web research for "OpenShift" in notebook [id]`
+14. `Check research status for notebook [id]`
+15. `Import all research sources from task [task_id] into notebook [id]`
+16. `Start DEEP web research for "AI ROI" in notebook [id]` ← **Kicks off 3-5 min background task**
+17. `Create brief audio overview for notebook [id] (show settings first)`
+18. `Confirmed - create it with confirm=True`
+19. `Create brief video overview for notebook [id] (show settings first)`
+20. `Confirmed - create it`
+21. `Check studio status for notebook [id]`
+22. `Create landscape infographic for notebook [id] (show settings first)`
+23. `Create short slide deck for notebook [id] (show settings first)`
+24. `Create Briefing Doc report for notebook [id] (show settings first)`
+25. `Create medium difficulty flashcards for notebook [id] (show settings first)`
+26. `Create mind map titled "AI Concepts" for notebook [id] (show settings first)`
+27. `List all mind maps in notebook [id]`
+28. `Check deep research status for notebook [id]` ← **By now, deep research should be complete**
+29. `Verify source_count > 0 and report field has content`
+30. `Import all deep research sources into notebook [id]`
+31. `Delete audio artifact [artifact_id] from notebook [id] (show warning first)`
+32. `Confirmed - delete it with confirm=True`
+33. `Delete notebook [id] (show warning first)` → `Confirmed - delete with confirm=True`

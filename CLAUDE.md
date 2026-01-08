@@ -100,6 +100,7 @@ src/notebooklm_mcp/
 | `notebook_get` | Get notebook details |
 | `notebook_describe` | Get AI-generated summary of notebook content with keywords |
 | `source_describe` | Get AI-generated summary and keyword chips for a source |
+| `source_get_content` | Get raw text content from a source (no AI processing) |
 | `notebook_rename` | Rename a notebook |
 | `chat_configure` | Configure chat goal/style and response length |
 | `notebook_delete` | Delete a notebook (REQUIRES confirmation) |
