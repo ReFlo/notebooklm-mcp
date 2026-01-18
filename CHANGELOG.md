@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.14] - 2026-01-17
+
+### Fixed
+- **Critical Research Stability**:
+  - `poll_research` now accepts status code `6` (Imported) as success, fixing "hanging" Fast Research.
+  - Added `target_task_id` filtering to `poll_research` to ensure the correct research task is returned (essential for Deep Research).
+  - Updated `research_status` and `research_import` to use task ID filtering.
+  - `research_status` tool now accepts an optional `task_id` parameter.
+- **Missing Source Constants**:
+  - Included the code changes for `SOURCE_TYPE_UPLOADED_FILE`, `SOURCE_TYPE_IMAGE`, and `SOURCE_TYPE_WORD_DOC` that were omitted in v0.1.13.
+
 ## [0.1.13] - 2026-01-17
 
 ### Added
