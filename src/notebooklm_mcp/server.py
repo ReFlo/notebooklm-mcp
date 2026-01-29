@@ -43,6 +43,12 @@ _client: NotebookLMClient | None = None
 _query_timeout: float = float(os.environ.get("NOTEBOOKLM_QUERY_TIMEOUT", "120.0"))
 
 
+def get_notebook_url(notebook_id: str) -> str:
+    """Get the URL for a notebook using the configured base URL."""
+    base_url = os.environ.get("NOTEBOOKLM_BASE_URL", "https://notebooklm.google.com").rstrip("/")
+    return f"{base_url}/notebook/{notebook_id}"
+
+
 def logged_tool():
     """Decorator that combines @mcp.tool() with MCP request/response logging."""
     def decorator(func):
@@ -785,7 +791,7 @@ def research_start(
                 "status": "success",
                 "task_id": result["task_id"],
                 "notebook_id": notebook_id,
-                "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+                "notebook_url": get_notebook_url(notebook_id),
                 "query": query,
                 "source": result["source"],
                 "mode": result["mode"],
@@ -1018,7 +1024,7 @@ def research_import(
             "imported_count": len(imported),
             "total_available": len(all_sources),
             "sources": imported,
-            "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+            "notebook_url": get_notebook_url(notebook_id),
         }
     except Exception as e:
         return {"status": "error", "error": str(e)}
@@ -1111,7 +1117,7 @@ def audio_overview_create(
                 "language": result["language"],
                 "generation_status": result["status"],
                 "message": "Audio generation started. Use studio_status to check progress.",
-                "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+                "notebook_url": get_notebook_url(notebook_id),
             }
         return {"status": "error", "error": "Failed to create audio overview"}
     except Exception as e:
@@ -1205,7 +1211,7 @@ def video_overview_create(
                 "language": result["language"],
                 "generation_status": result["status"],
                 "message": "Video generation started. Use studio_status to check progress.",
-                "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+                "notebook_url": get_notebook_url(notebook_id),
             }
         return {"status": "error", "error": "Failed to create video overview"}
     except Exception as e:
@@ -1251,7 +1257,7 @@ def studio_status(notebook_id: str) -> dict[str, Any]:
                 "in_progress": len(in_progress),
             },
             "artifacts": artifacts,
-            "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+            "notebook_url": get_notebook_url(notebook_id),
         }
     except Exception as e:
         return {"status": "error", "error": str(e)}
@@ -1381,7 +1387,7 @@ def infographic_create(
                 "language": result["language"],
                 "generation_status": result["status"],
                 "message": "Infographic generation started. Use studio_status to check progress.",
-                "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+                "notebook_url": get_notebook_url(notebook_id),
             }
         return {"status": "error", "error": "Failed to create infographic"}
     except Exception as e:
@@ -1475,7 +1481,7 @@ def slide_deck_create(
                 "language": result["language"],
                 "generation_status": result["status"],
                 "message": "Slide deck generation started. Use studio_status to check progress.",
-                "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+                "notebook_url": get_notebook_url(notebook_id),
             }
         return {"status": "error", "error": "Failed to create slide deck"}
     except Exception as e:
@@ -1540,7 +1546,7 @@ def report_create(
                 "language": result["language"],
                 "generation_status": result["status"],
                 "message": "Report generation started. Use studio_status to check progress.",
-                "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+                "notebook_url": get_notebook_url(notebook_id),
             }
         return {"status": "error", "error": "Failed to create report"}
     except Exception as e:
@@ -1605,7 +1611,7 @@ def flashcards_create(
                 "difficulty": result["difficulty"],
                 "generation_status": result["status"],
                 "message": "Flashcards generation started. Use studio_status to check progress.",
-                "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+                "notebook_url": get_notebook_url(notebook_id),
             }
         return {"status": "error", "error": "Failed to create flashcards"}
     except Exception as e:
@@ -1674,7 +1680,7 @@ def quiz_create(
                 "difficulty": result["difficulty"],
                 "generation_status": result["status"],
                 "message": "Quiz generation started. Use studio_status to check progress.",
-                "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+                "notebook_url": get_notebook_url(notebook_id),
             }
         return {"status": "error", "error": "Failed to create quiz"}
     except Exception as e:
@@ -1733,7 +1739,7 @@ def data_table_create(
                 "description": result["description"],
                 "generation_status": result["status"],
                 "message": "Data table generation started. Use studio_status to check progress.",
-                "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+                "notebook_url": get_notebook_url(notebook_id),
             }
         return {"status": "error", "error": "Failed to create data table"}
     except Exception as e:
@@ -1807,7 +1813,7 @@ def mind_map_create(
                 "root_name": root_name,
                 "children_count": children_count,
                 "message": "Mind map created and saved successfully.",
-                "notebook_url": f"https://notebooklm.google.com/notebook/{notebook_id}",
+                "notebook_url": get_notebook_url(notebook_id),
             }
         return {"status": "error", "error": "Failed to save mind map"}
     except Exception as e:

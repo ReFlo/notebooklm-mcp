@@ -180,7 +180,8 @@ class Notebook:
 
     @property
     def url(self) -> str:
-        return f"https://notebooklm.google.com/notebook/{self.id}"
+        base_url = os.environ.get("NOTEBOOKLM_BASE_URL", "https://notebooklm.google.com").rstrip("/")
+        return f"{base_url}/notebook/{self.id}"
 
     @property
     def ownership(self) -> str:
@@ -193,7 +194,7 @@ class Notebook:
 class NotebookLMClient:
     """Client for NotebookLM MCP internal API."""
 
-    BASE_URL = "https://notebooklm.google.com"
+    BASE_URL = os.environ.get("NOTEBOOKLM_BASE_URL", "https://notebooklm.google.com").rstrip("/")
     BATCHEXECUTE_URL = f"{BASE_URL}/_/LabsTailwindUi/data/batchexecute"
 
     # Known RPC IDs

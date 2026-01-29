@@ -20,6 +20,7 @@ Usage:
 """
 
 import json
+import os
 import re
 import sys
 import time
@@ -38,7 +39,10 @@ from .auth import (
 
 
 CDP_DEFAULT_PORT = 9222
-NOTEBOOKLM_URL = "https://notebooklm.google.com/"
+NOTEBOOKLM_URL = os.environ.get("NOTEBOOKLM_BASE_URL", "https://notebooklm.google.com/")
+# Ensure URL ends with /
+if not NOTEBOOKLM_URL.endswith("/"):
+    NOTEBOOKLM_URL += "/"
 
 
 def get_chrome_user_data_dir() -> str | None:

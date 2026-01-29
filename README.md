@@ -179,6 +179,7 @@ Alternatively, use environment variables:
 | `NOTEBOOKLM_MCP_HOST` | Host to bind |
 | `NOTEBOOKLM_MCP_DEBUG` | `true` to enable debug logging |
 | `NOTEBOOKLM_QUERY_TIMEOUT` | Query timeout in seconds |
+| `NOTEBOOKLM_BASE_URL` | Custom base URL (default: `https://notebooklm.google.com`) |
 
 ### HTTP Support (Open WebUI)
 Run as an HTTP server for remote access or multi-user setups:
